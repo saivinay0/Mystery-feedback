@@ -7,11 +7,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function DELETE(
   request: NextRequest,
-  context: { params: { messageid: string } }
-) {
+  context: { params: { messageid: string } } // Explicit typing
+): Promise<NextResponse> {
   const { messageid } = context.params;
 
-  if (typeof messageid !== 'string') {
+  if (!messageid) {
     return NextResponse.json(
       { success: false, message: 'Invalid message ID' },
       { status: 400 }
