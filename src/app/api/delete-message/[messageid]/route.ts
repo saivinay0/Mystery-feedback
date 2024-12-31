@@ -5,11 +5,12 @@ import { User } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/options';
 import { NextRequest, NextResponse } from 'next/server';
 
+// Fixing the type of the DELETE handler
 export async function DELETE(
   request: NextRequest,
-  context: { params: { messageid: string } } // Explicit typing
+  { params }: { params: { messageid?: string } }  // Correct typing
 ): Promise<NextResponse> {
-  const { messageid } = context.params;
+  const messageid = params.messageid;
 
   if (!messageid) {
     return NextResponse.json(
