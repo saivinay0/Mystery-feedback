@@ -33,14 +33,14 @@
     "next": "15.1.2",
     "next-auth": "^4.24.11",
     "openai": "^4.77.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-email": "^3.0.4",
     "react-hook-form": "^7.54.2",
     "resend": "^4.0.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "usehooks-ts": "^2.9.1",
+    "usehooks-ts": "^3.1.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
