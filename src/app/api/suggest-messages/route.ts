@@ -5,6 +5,11 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 export const runtime = 'edge';
 
+// Extend the response type to include safety feedback
+interface ExtendedGenerateContentResponse {
+  safetyFeedback?: { blocked: boolean }[];
+}
+
 export async function POST() {
   try {
     const prompt = `Create three light-hearted, engaging questions separated by '||'. 
@@ -32,9 +37,10 @@ export async function POST() {
               controller.enqueue(encoder.encode(text));
             }
 
-            // Check final response for safety feedback
-            const finalResponse = await result.response;
-            if (finalResponse && finalResponse.safetyFeedback) {
+            // Assert the type of finalResponse with the extended interface
+            const finalResponse = (await result.response) as ExtendedGenerateContentResponse;
+
+            if (finalResponse?.safetyFeedback) {
               const flagged = finalResponse.safetyFeedback.some((feedback) => feedback.blocked);
               if (flagged || contentBlocked) {
                 controller.enqueue(encoder.encode("⚠️ Content blocked due to safety policies."));
