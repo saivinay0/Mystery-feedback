@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 export const runtime = 'edge';
 
-export async function POST(req: Request) {
+export async function POST() {
   try {
     const prompt = `Create three light-hearted, engaging questions separated by '||'. 
     Focus on fun, non-personal topics that spark curiosity and friendly interactions.`;
